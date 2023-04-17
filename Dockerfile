@@ -3,6 +3,7 @@ WORKDIR /code
 COPY requirements.txt .
 RUN apt-get update && apt-get install build-essential -y
 RUN apt-get install -y git
+RUN apt-get install -y python3-tk
 RUN pip install --upgrade pip
 RUN pip install black
 RUN pip install --no-cache-dir -r requirements.txt
