@@ -85,3 +85,4 @@ token_price_change_weight_dict = {
 
 impermanent_loss = flexible_impermanent_loss_calculator(token_price_change_weight_dict)
 print("Impermanent loss:", impermanent_loss)
+

@@ -126,3 +126,4 @@ print(
     "Impermanent loss in percent:",
     impermenant_loss_calculator(initial_token_a_price, final_token_a_price),
 )
+
