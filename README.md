@@ -1,1 +1,1 @@
-Making of simple and advanced impermanent loss calculators or simulators.
+This repo contains many simple and advanced demonstrator and tools related to Defi automated makers and liquidity providing.
