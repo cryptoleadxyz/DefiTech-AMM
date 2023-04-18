@@ -3,6 +3,9 @@
 # Message: Hey there fellow coders! If you found my code helpful and want to show your support, consider buying me a coffee or two. Your donations help me keep improving the code and creating more awesome stuff for the community. Thanks for your support!
 # Donation: cryptolead.eth or 0xa2c35DA418f52ed89Ba18d51DbA314EB1dc396d0
 
+# Objectives:
+# This .py is based on 1_impermanent_loss_calculator.py but incorporating % from total pool and trading fee
+
 from math import sqrt
 
 # Input parameters
@@ -12,6 +15,10 @@ initial_token_a_quantity = 1
 
 final_token_a_price = 200
 final_token_b_price = 1
+
+user_holding_as_percent_of_total_pool = 0.1 # user's initial holding is {i.e.,10%} of that of the total pool
+final_trading_fee_collected_as_token_a = 1
+final_trading_fee_collected_as_token_b = 100
 
 # Impermanent loss calculation, based on 2 fomulas
 # 1) Equal value of LP token-pair: after change in price, both assets must be equal in value (price * quantity)
@@ -126,3 +133,26 @@ print(
     "Impermanent loss in percent:",
     impermenant_loss_calculator(initial_token_a_price, final_token_a_price),
 )
+
+# Calculate impermenant loss by including % of fee collected by LP pool
+final_user_collected_fee_in_token_a = user_holding_as_percent_of_total_pool * final_trading_fee_collected_as_token_a
+final_user_collected_fee_in_token_b = user_holding_as_percent_of_total_pool * final_trading_fee_collected_as_token_b
+
+final_token_a_quantity_with_fee = final_token_a_quantity + final_user_collected_fee_in_token_a
+final_token_b_quantity_with_fee = final_token_b_quantity + final_user_collected_fee_in_token_b
+
+impermanant_loss_in_value_with_fee = (
+    (final_token_a_price) * (final_token_a_quantity_with_fee)
+    + (final_token_b_price) * (final_token_b_quantity_with_fee)
+) - (
+    (final_token_a_price) * (initial_token_a_quantity)
+    + (final_token_b_price) * (initial_token_b_quantity)
+)
+impermanent_loss_in_percent_with_fee = impermanant_loss_in_value_with_fee  / (
+    (final_token_a_price) * (initial_token_a_quantity)
+    + (final_token_b_price) * (initial_token_b_quantity)
+)
+
+print()
+print("Impermanent loss (with fee) in value:", impermanant_loss_in_value_with_fee )
+print("Impermanent loss (with fee) in percent:", impermanent_loss_in_percent_with_fee)
