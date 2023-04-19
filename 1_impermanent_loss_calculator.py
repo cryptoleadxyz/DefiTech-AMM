@@ -15,7 +15,7 @@ final_token_b_price = 1
 
 # Impermanent loss calculation, based on 2 fomulas
 # 1) Equal value of LP token-pair: after change in price, both assets must be equal in value (price * quantity)
-# 2) Constant product formuula: after change in price, quantities of A and B in the pool remains constant, regardless of the changes in their individual prices
+# 2) Constant product formula: after change in price, quantities of A and B in the pool remains constant, regardless of the changes in their individual prices
 
 # Find initial quantity of token b; and initial product of token a and token b
 initial_price_ratio = initial_token_a_price / initial_token_b_price
@@ -116,14 +116,14 @@ print("Impermanent loss in percent:", impermanent_loss_in_percent)
 
 # Option 2 - impermanent loss calculation
 # Once you have the change in price ratio, you can plug it into this formula and compute IL directly
-def impermenant_loss_calculator(initial_token_price, final_roken_price):
-    price_ratio = final_roken_price / initial_token_price
+def impermanent_loss_calculator(initial_token_price, final_token_price):
+    price_ratio = final_token_price / initial_token_price
     return (2 * sqrt(price_ratio)) / (1 + price_ratio) - 1
 
 
 print()
 print(
     "Impermanent loss in percent:",
-    impermenant_loss_calculator(initial_token_a_price, final_token_a_price),
+    impermanent_loss_calculator(initial_token_a_price, final_token_a_price),
 )
 

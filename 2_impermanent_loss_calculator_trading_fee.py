@@ -104,27 +104,27 @@ print("Constant K in constant product formula:", k)
 
 # Option 1 - impermanent loss calculation
 # Subtract the total LP pool value for hodling the original tokens with new prices by the total LP pool value from providing LP
-impermanant_loss_in_value = (
+impermanent_loss_in_value = (
     (final_token_a_price) * (final_token_a_quantity)
     + (final_token_b_price) * (final_token_b_quantity)
 ) - (
     (final_token_a_price) * (initial_token_a_quantity)
     + (final_token_b_price) * (initial_token_b_quantity)
 )
-impermanent_loss_in_percent = impermanant_loss_in_value / (
+impermanent_loss_in_percent = impermanent_loss_in_value / (
     (final_token_a_price) * (initial_token_a_quantity)
     + (final_token_b_price) * (initial_token_b_quantity)
 )
 
 print()
-print("Impermanent loss in value:", impermanant_loss_in_value)
+print("Impermanent loss in value:", impermanent_loss_in_value)
 print("Impermanent loss in percent:", impermanent_loss_in_percent)
 
 
 # Option 2 - impermanent loss calculation
 # Once you have the change in price ratio, you can plug it into this formula and compute IL directly
-def impermenant_loss_calculator(initial_token_price, final_roken_price):
-    price_ratio = final_roken_price / initial_token_price
+def impermenant_loss_calculator(initial_token_price, final_token_price):
+    price_ratio = final_token_price / initial_token_price
     return (2 * sqrt(price_ratio)) / (1 + price_ratio) - 1
 
 
@@ -141,18 +141,18 @@ final_user_collected_fee_in_token_b = user_holding_as_percent_of_total_pool * fi
 final_token_a_quantity_with_fee = final_token_a_quantity + final_user_collected_fee_in_token_a
 final_token_b_quantity_with_fee = final_token_b_quantity + final_user_collected_fee_in_token_b
 
-impermanant_loss_in_value_with_fee = (
+impermanent_loss_in_value_with_fee = (
     (final_token_a_price) * (final_token_a_quantity_with_fee)
     + (final_token_b_price) * (final_token_b_quantity_with_fee)
 ) - (
     (final_token_a_price) * (initial_token_a_quantity)
     + (final_token_b_price) * (initial_token_b_quantity)
 )
-impermanent_loss_in_percent_with_fee = impermanant_loss_in_value_with_fee  / (
+impermanent_loss_in_percent_with_fee = impermanent_loss_in_value_with_fee  / (
     (final_token_a_price) * (initial_token_a_quantity)
     + (final_token_b_price) * (initial_token_b_quantity)
 )
 
 print()
-print("Impermanent loss (with fee) in value:", impermanant_loss_in_value_with_fee )
+print("Impermanent loss (with fee) in value:", impermanent_loss_in_value_with_fee )
 print("Impermanent loss (with fee) in percent:", impermanent_loss_in_percent_with_fee)
